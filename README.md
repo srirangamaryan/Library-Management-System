@@ -130,4 +130,3 @@ See the `LICENSE` file for details.
 If you like this project, consider giving it a ⭐ on GitHub!
 
 
-If you want, I can also make a **more premium README (with screenshots, GIF demo, or badges like contributors & stars)**.
