@@ -35,17 +35,6 @@ This application efficiently manages book inventories with synchronized collecti
   - `ArrayList` → Structured attribute storage
 - **Package:** `CWH.Library_Management`
 
----
-
-## 📂 Project Structure
-
-
-
-.
-├── CWH/
-│   └── Library_Management/
-│       └── Database.java     # Main Logic & UI
-└── README.md                 # Documentation
 
 
 ---
