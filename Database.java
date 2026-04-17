@@ -1,105 +1,128 @@
 package CWH.Library_Management;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Iterator;
 
-class BookNotFound extends Exception{
-    @Override
-    public String getMessage() {
-        return super.getMessage();
+class BookNotFound extends Exception {
+    public BookNotFound(String message) {
+        super(message);
     }
 }
 
-public class Databasae {
-static LinkedList<ArrayList<String>> books = new LinkedList<>();
-static LinkedList<ArrayList<String>> issuedbooks = new LinkedList<>();
+public class Database {
+    static LinkedList<ArrayList<String>> books = new LinkedList<>();
+    static LinkedList<ArrayList<String>> issuedbooks = new LinkedList<>();
 
-    static void addBook(String name,String aName)
-    {
-        ArrayList<String> book=new ArrayList<>();
+    static void addBook(String name, String aName) {
+        ArrayList<String> book = new ArrayList<>();
         book.add(name);
         book.add(aName);
         books.add(book);
-
     }
-    static void issueBook(String bookname, String issName, String issDate) throws BookNotFound
-    {
-        for(ArrayList<String> a:books){
-            if(a.contains(bookname)){
+
+    static void issueBook(String bookname, String issName, String issDate) throws BookNotFound {
+        Iterator<ArrayList<String>> iterator = books.iterator();
+        boolean found = false;
+        
+        while (iterator.hasNext()) {
+            ArrayList<String> a = iterator.next();
+            if (a.contains(bookname)) {
                 a.add(issName);
+                a.add(issDate);
                 issuedbooks.add(a);
-                books.remove(a);}
-            else
-                throw new BookNotFound();
-        }
-
-    }
-    static void returnBook(String bookname)
-    {
-        for(ArrayList<String> a:issuedbooks){
-            if(a.contains(bookname)){
-                books.add(a);
-                issuedbooks.remove(a);}
-        }
-
-    }
-    static void displayAvailable()
-    {
-        for(ArrayList<String> a:books){
-            System.out.println(a.get(0)+"  "+a.get(1));
-        }
-    }
-    static void displayIssuedBooks()
-    {
-        for(ArrayList<String> a:issuedbooks){
-            System.out.println(a.get(0));
-        }
-    }
-public static void main(String[] args) {
-
-    addBook("Harry Potter 1","J.K.Rowling");
-    Scanner sc=new Scanner(System.in);
-    boolean exit=false;
-    System.out.println("Welcome to Library Management System");
-    while(true) {
-        System.out.println("Enter 1 to see Available books");
-        System.out.println("Enter 2 to see Issued books");
-        System.out.println("Enter 3 to Issue book");
-        System.out.println("Enter 4 to Return book");
-        System.out.println("Enter 5 to Add Book");
-        System.out.println("Enter 6 to Exit");
-        System.out.println("Enter Choice");
-        int choice=sc.nextInt();
-        switch (choice) {
-            case 1 -> displayAvailable();
-            case 2 -> displayIssuedBooks();
-            case 3 -> {
-                System.out.println("Enter book to be issued");
-                String book = sc.nextLine();
-                System.out.println("Second input");
-                String broom = sc.nextLine();
-                issueBook(broom);
+                iterator.remove();
+                found = true;
+                System.out.println("Book issued successfully!");
+                break;
             }
-            case 4 -> {
-                System.out.println("Enter book to be returned");
-                String boo = sc.nextLine();
-                String booth = sc.nextLine();
-                returnBook(booth);
-            }
-            case 5 -> {
-                System.out.println("Enter book to be Added");
-                String bookname = sc.nextLine();
-                String booname = sc.nextLine();
-                System.out.println("Author Name");
-                String abo = sc.nextLine();
-                addBook(booname, abo);
-            }
-            case 6 -> exit = true;
-            default -> System.out.println("Enter valid Choice");
         }
-    if(exit) {
-               break;}
+        
+        if (!found) {
+            throw new BookNotFound("Error: Book not found.");
         }
+    }
+
+    static void returnBook(String bookname) {
+        Iterator<ArrayList<String>> iterator = issuedbooks.iterator();
+        boolean found = false;
+        
+        while (iterator.hasNext()) {
+            ArrayList<String> a = iterator.next();
+            if (a.contains(bookname)) {
+                ArrayList<String> returnedBook = new ArrayList<>();
+                returnedBook.add(a.get(0));
+                returnedBook.add(a.get(1));
+                
+                books.add(returnedBook);
+                iterator.remove();
+                found = true;
+                System.out.println("Book returned successfully!");
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Book not found in issued list.");
+        }
+    }
+
+    static void displayAvailable() {
+        System.out.println("\nAvailable Books:");
+        for (ArrayList<String> a : books) {
+            System.out.println(a.get(0) + " - " + a.get(1));
+        }
+    }
+
+    static void displayIssuedBooks() {
+        System.out.println("\nIssued Books:");
+        for (ArrayList<String> a : issuedbooks) {
+            System.out.println(a.get(0) + " (To: " + a.get(2) + ")");
+        }
+    }
+
+    public static void main(String[] args) {
+        addBook("Harry Potter 1", "J.K.Rowling");
+        Scanner sc = new Scanner(System.in);
+        boolean exit = false;
+
+        while (true) {
+            System.out.println("\n1. Available 2. Issued 3. Issue 4. Return 5. Add 6. Exit");
+            int choice = sc.nextInt();
+            sc.nextLine(); 
+
+            switch (choice) {
+                case 1 -> displayAvailable();
+                case 2 -> displayIssuedBooks();
+                case 3 -> {
+                    System.out.print("Book: ");
+                    String book = sc.nextLine();
+                    System.out.print("Name: ");
+                    String issuer = sc.nextLine();
+                    System.out.print("Date: ");
+                    String date = sc.nextLine();
+                    try {
+                        issueBook(book, issuer, date);
+                    } catch (BookNotFound e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                case 4 -> {
+                    System.out.print("Book to return: ");
+                    String b = sc.nextLine();
+                    returnBook(b);
+                }
+                case 5 -> {
+                    System.out.print("Book Name: ");
+                    String n = sc.nextLine();
+                    System.out.print("Author: ");
+                    String a = sc.nextLine();
+                    addBook(n, a);
+                }
+                case 6 -> exit = true;
+            }
+            if (exit) break;
+        }
+        sc.close();
     }
 }
-
