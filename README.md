@@ -1,98 +1,143 @@
-# Library Management System (LMS)
+```markdown
+# 📚 Library Management System (LMS)
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Build](https://img.shields.io/badge/Build-Success-brightgreen?style=for-the-badge)
 
-A high-performance, console-based **Library Management System** implemented in Java. This application manages book inventories using synchronized collection logic, featuring custom exception handling and a robust command-line interface.
-
-## 🚀 Core Features
-
-* **Dynamic Inventory:** Add and track books with specific author metadata.
-* **State Management:** Seamlessly transition books between `Available` and `Issued` states.
-* **Safe Iteration:** Utilizes `Iterator` patterns to ensure thread-safe collection modification, preventing `ConcurrentModificationException`.
-* **Error Handling:** Implements a custom `BookNotFound` exception architecture for precise debugging and user feedback.
-* **Transaction Logging:** Captures borrower names and issue dates during the checkout process.
+A high-performance, console-based **Library Management System** built using Java.  
+This application efficiently manages book inventories with synchronized collection handling, custom exception logic, and a robust CLI interface.
 
 ---
 
-## 🛠 Technical Stack
+## 🚀 Core Features
 
-* **Language:** Java (JDK 8+)
-* **Data Structures:** * `LinkedList` for efficient O(1) removals during book issuance.
-    * `ArrayList` for structured storage of book attributes (Title, Author, Borrower, Date).
-* **Package:** `CWH.Library_Management`
+- 📖 **Dynamic Inventory**  
+  Add and manage books with author metadata.
+
+- 🔄 **State Management**  
+  Transition books between `Available` and `Issued` states.
+
+- 🛡️ **Safe Iteration**  
+  Uses `Iterator` to safely modify collections and avoid `ConcurrentModificationException`.
+
+- ⚠️ **Error Handling**  
+  Custom `BookNotFound` exception for precise debugging and user feedback.
+
+- 🧾 **Transaction Logging**  
+  Stores borrower name and issue date during checkout.
+
+---
+
+## 🛠️ Technical Stack
+
+- **Language:** Java (JDK 8+)
+- **Data Structures:**
+  - `LinkedList` → Efficient O(1) removals (book issuing)
+  - `ArrayList` → Structured attribute storage
+- **Package:** `CWH.Library_Management`
 
 ---
 
 ## 📂 Project Structure
 
-```text
+
+
 .
 ├── CWH/
 │   └── Library_Management/
 │       └── Database.java     # Main Logic & UI
 └── README.md                 # Documentation
 
+
+---
+
 ## ⚙️ Installation & Execution
 
-### 1. Clone the Repository
+### 1️⃣ Clone the Repository
 ```bash
-git clone [https://github.com/yourusername/LMS-Java.git](https://github.com/yourusername/LMS-Java.git)
+git clone https://github.com/yourusername/LMS-Java.git
 cd LMS-Java
 
-2. Compile
 
-Compile the source code into the proper package directory:
-Bash
+### 2️⃣ Compile
 
+```bash
 javac -d . Database.java
 
-3. Run
+### 3️⃣ Run
 
-Launch the application using the fully qualified class name:
-Bash
-
+```bash
 java CWH.Library_Management.Database
 
-🎮 How to Use
 
-Once the application starts, navigate using the following menu options:
 
-    Available Books: View the current list of titles ready for borrowing.
 
-    Issued Books: Check which books are currently out and who has them.
+## 🎮 How to Use
 
-    Issue Book: Remove a book from inventory and assign it to a borrower.
+Once the application starts, choose from the menu:
 
-    Return Book: Check a book back into the system.
+* 📚 **Available Books** → View all available books
+* 📕 **Issued Books** → View borrowed books and details
+* 📤 **Issue Book** → Assign a book to a borrower
+* 📥 **Return Book** → Return a borrowed book
+* ➕ **Add Book** → Add new books to the system
+* ❌ **Exit** → Close the application
 
-    Add Book: Manually expand the library's collection.
+---
 
-    Exit: Terminate the session securely.
+## 🧠 Code Logic Overview
 
-📝 Code Logic Overview
+The system uses two primary collections:
 
-The system utilizes two primary lists to maintain data integrity:
+* **`books` List**
+  Stores available books → `[Title, Author]`
 
-    books List: Contains [Title, Author] for all available items.
+* **`issuedbooks` List**
+  Stores issued books → `[Title, Author, Borrower, Date]`
 
-    issuedbooks List: Contains [Title, Author, Borrower, Date] for all active loans.
+### 🔁 Return Flow
 
-When a book is returned, the system intelligently strips the borrower metadata and re-indexes the book into the primary inventory to save memory and maintain consistent data shapes.
-🤝 Contributing
+When a book is returned:
+
+* Borrower data is removed
+* Book is re-added to the main inventory
+* Ensures memory efficiency and consistent structure
+
+---
+
+## 🤝 Contributing
 
 Contributions are welcome!
 
-    Fork the Project.
+1. Fork the repository
+2. Create a feature branch
 
-    Create your Feature Branch (git checkout -b feature/NewFeature).
+   ```bash
+   git checkout -b feature/NewFeature
+3. Commit changes
 
-    Commit your Changes (git commit -m 'Add NewFeature').
+   ```bash
+   git commit -m "Add NewFeature"
+4. Push to GitHub
 
-    Push to the Branch (git push origin feature/NewFeature).
+   ```bash
+   git push origin feature/NewFeature
+5. Open a Pull Request
 
-    Open a Pull Request.
+---
 
-📜 License
+## 📜 License
 
-Distributed under the MIT License. See LICENSE for more information.
+This project is licensed under the **MIT License**.
+See the `LICENSE` file for details.
+
+---
+
+## ⭐ Support
+
+If you like this project, consider giving it a ⭐ on GitHub!
+
+```
+
+If you want, I can also make a **more premium README (with screenshots, GIF demo, or badges like contributors & stars)**.
+```
