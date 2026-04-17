@@ -1,4 +1,3 @@
-```markdown
 # 📚 Library Management System (LMS)
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
@@ -57,18 +56,19 @@ This application efficiently manages book inventories with synchronized collecti
 ```bash
 git clone https://github.com/yourusername/LMS-Java.git
 cd LMS-Java
-
+```
 
 ### 2️⃣ Compile
 
 ```bash
 javac -d . Database.java
+```
 
 ### 3️⃣ Run
 
 ```bash
 java CWH.Library_Management.Database
-
+```
 
 
 
@@ -114,14 +114,17 @@ Contributions are welcome!
 
    ```bash
    git checkout -b feature/NewFeature
+   ```
 3. Commit changes
 
    ```bash
    git commit -m "Add NewFeature"
+   ```
 4. Push to GitHub
 
    ```bash
    git push origin feature/NewFeature
+   ```
 5. Open a Pull Request
 
 ---
@@ -137,7 +140,5 @@ See the `LICENSE` file for details.
 
 If you like this project, consider giving it a ⭐ on GitHub!
 
-```
 
 If you want, I can also make a **more premium README (with screenshots, GIF demo, or badges like contributors & stars)**.
-```
