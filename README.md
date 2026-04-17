@@ -43,8 +43,8 @@ This application efficiently manages book inventories with synchronized collecti
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/yourusername/LMS-Java.git
-cd LMS-Java
+git clone https://github.com/srirangamaryan/Library-Management-System.git
+cd Library-Management-System
 ```
 
 ### 2️⃣ Compile
